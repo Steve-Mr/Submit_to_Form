@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Logger</string>
+    <string name="types">Types</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="failed">Failed</string>
+    <string name="amount">Amount</string>
+</resources>

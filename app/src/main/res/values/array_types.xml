@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="array_types">
+        <item>@string/meals</item>
+        <item>@string/snacks</item>
+        <item>@string/water_fee</item>
+        <item>@string/daily</item>
+        <item>@string/medicine</item>
+        <item>@string/digital</item>
+    </string-array>
+    <string name="meals" translatable="false">三餐</string>
+    <string name="snacks" translatable="false">零食</string>
+    <string name="water_fee" translatable="false">水费</string>
+    <string name="daily" translatable="false">日用</string>
+    <string name="medicine" translatable="false">医药</string>
+    <string name="digital" translatable="false">数码</string>
+</resources>
