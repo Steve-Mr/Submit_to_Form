@@ -43,7 +43,7 @@ class RealMainActivity: AppCompatActivity() {
 
                 scope.launch {
                     if (sendPostRequest(amount, type)){
-                        finish()
+                        finishAndRemoveTask()
                     }
                     else {
                         binding.title.text = resources.getText(R.string.failed)
@@ -53,7 +53,7 @@ class RealMainActivity: AppCompatActivity() {
         }
 
         binding.no.setOnClickListener {
-            finish()
+            finishAndRemoveTask()
         }
 
     }
