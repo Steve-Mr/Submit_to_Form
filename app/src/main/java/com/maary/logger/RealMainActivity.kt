@@ -1,6 +1,7 @@
 package com.maary.logger
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -26,6 +27,10 @@ class RealMainActivity: AppCompatActivity() {
         setContentView(binding.root)
         setFinishOnTouchOutside(false)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        binding.title.setOnClickListener{
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
 
         binding.minus.setOnClickListener {
             if (binding.minus.isChecked){

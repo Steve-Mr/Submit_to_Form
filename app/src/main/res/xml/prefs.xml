@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/general">
+
+        <EditTextPreference
+            android:key="url_setting"
+            android:summary="@string/url_of_form"
+            android:title="@string/url" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/entries">
+
+
+        <ListPreference
+            android:dialogTitle="@string/delete_entries"
+            android:key="entry_list"
+            android:summary="@string/delete_entries_detail"
+            android:title="@string/delete_entries"
+            android:enabled="false"/>
+
+        <!-- Here you can add any number of EditTextPreference and/or ListPreference to manage existing entries -->
+
+
+        <EditTextPreference
+            android:dialogTitle="@string/input_new_entry"
+            android:key="new_entry"
+            android:summary="@string/input_new_entry_string"
+            android:title="@string/new_entry" />
+
+        <!-- You can add any number of EditTextPreference and/or ListPreference here to add new entries -->
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -5,4 +5,19 @@
     <string name="cancel">Cancel</string>
     <string name="failed">Failed</string>
     <string name="amount">Amount</string>
+    <string name="url">URL</string>
+    <string name="url_of_form">URL of Google Form</string>
+    <string name="general">General</string>
+    <string name="entries">Entries</string>
+    <string name="manage_entries">Manage Entries</string>
+    <string name="manage_entries_detail">Edit or Delete Entries</string>
+    <string name="add_entry">Add Entry</string>
+    <string name="add_new_entry">Add a new Entry</string>
+    <string name="new_entry">New Entry</string>
+    <string name="input_new_entry">Input new entry</string>
+    <string name="input_new_entry_string">Input a new entry string</string>
+    <string name="entries_list">Entries List</string>
+    <string name="select_entries">Select Entries</string>
+    <string name="delete_entries">Delete Entries</string>
+    <string name="delete_entries_detail">Select and delete an entry</string>
 </resources>
