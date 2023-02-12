@@ -1,8 +1,10 @@
 package com.maary.logger
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.maary.logger.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
@@ -33,6 +35,11 @@ class RealMainActivity: AppCompatActivity() {
             }
         }
 
+        binding.types.setOnClickListener{
+            hideKeyboard()
+            binding.types.showDropDown()
+        }
+
         binding.yes.setOnClickListener {
 
             if (binding.textfieldAmount.editText?.text.toString().trim() != ""){
@@ -56,6 +63,12 @@ class RealMainActivity: AppCompatActivity() {
             finishAndRemoveTask()
         }
 
+    }
+
+    // 隐藏键盘
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 
     private suspend fun sendPostRequest(entry487437733: String, entry198297327: String): Boolean = withContext(
