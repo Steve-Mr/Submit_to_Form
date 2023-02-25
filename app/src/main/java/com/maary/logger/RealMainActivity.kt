@@ -52,6 +52,7 @@ class RealMainActivity: AppCompatActivity() {
                 var amount = binding.textfieldAmount.editText?.text.toString().trim()
                 if (!binding.minus.isChecked) amount = "-$amount"
                 val type = binding.menu.editText?.text.toString()
+                binding.yes.isClickable = false
 
                 scope.launch {
                     if (sendPostRequest(amount, type)){
@@ -59,6 +60,7 @@ class RealMainActivity: AppCompatActivity() {
                     }
                     else {
                         binding.title.text = resources.getText(R.string.failed)
+                        binding.yes.isClickable = true
                     }
                 }
             }
