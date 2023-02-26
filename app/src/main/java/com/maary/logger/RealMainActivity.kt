@@ -1,12 +1,17 @@
 package com.maary.logger
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.maary.logger.database.Transaction
 import com.maary.logger.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +25,9 @@ class RealMainActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val scope = CoroutineScope(Dispatchers.Main)
+    private val transactionViewModel: TransactionViewModel by viewModels {
+        TransactionViewModelFactory((application as TransactionApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +53,14 @@ class RealMainActivity: AppCompatActivity() {
             binding.types.showDropDown()
         }
 
+        val adapter = TransractionListAdapter()
+        binding.lastRecyclerView.adapter = adapter
+        binding.lastRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        transactionViewModel.lastTransaction.observe(this, Observer { transition ->
+            transition?.let { adapter.submitList(it) }
+        })
+
         binding.yes.setOnClickListener {
 
             if (binding.textfieldAmount.editText?.text.toString().trim() != ""){
@@ -56,6 +72,11 @@ class RealMainActivity: AppCompatActivity() {
 
                 scope.launch {
                     if (sendPostRequest(amount, type)){
+                        transactionViewModel.insert(
+                            Transaction(
+                                amount.toDouble(),
+                                type,
+                                (System.currentTimeMillis()/1000).toInt()))
                         finishAndRemoveTask()
                     }
                     else {

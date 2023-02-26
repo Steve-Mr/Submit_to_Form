@@ -13,11 +13,11 @@ interface TransactionDao {
     fun getRecentSubmit(): Flow<List<Transaction>>
 
     @Query("SELECT * FROM transaction_table ORDER BY time DESC LIMIT 1")
-    fun getLastSubmit(): Flow<Transaction>
+    fun getLastSubmit(): Flow<List<Transaction>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(transaction: Transaction)
 
-    @Query("DELETE FROM transaction_table WHERE time < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 30 DAY))")
+    @Query("DELETE FROM transaction_table WHERE strftime('%s', 'now') - time > 30*24*60*60")
     suspend fun deleteOldSubmit()
 }
