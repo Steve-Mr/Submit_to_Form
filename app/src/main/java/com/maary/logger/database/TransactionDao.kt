@@ -20,4 +20,10 @@ interface TransactionDao {
 
     @Query("DELETE FROM transaction_table WHERE strftime('%s', 'now') - time > 30*24*60*60")
     suspend fun deleteOldSubmit()
+
+    @Query("DELETE FROM transaction_table")
+    suspend fun deleteAll()
+
+    @Query("DELETE FROM transaction_table WHERE time = :selected")
+    fun deleteSelected(selected: Int)
 }

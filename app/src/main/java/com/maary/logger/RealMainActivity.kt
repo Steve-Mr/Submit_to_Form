@@ -6,12 +6,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maary.logger.database.Transaction
 import com.maary.logger.databinding.ActivityMainBinding
@@ -56,23 +54,31 @@ class RealMainActivity: AppCompatActivity() {
             binding.types.showDropDown()
         }
 
-        val adapter = TransactionListAdapter()
+        val adapter = TransactionListAdapter (
+            onItemClick = { handleRecyclerClick() },
+            onItemLongClick = { _ -> false})
         binding.lastRecyclerView.adapter = adapter
         binding.lastRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        binding.lastRecyclerView.setOnTouchListener { view, motionEvent ->
-            if (motionEvent.action == MotionEvent.ACTION_UP)
-                view.performClick()
-            else
-                false
-        }
+//        binding.lastRecyclerView.setOnTouchListener { view, motionEvent ->
+//            if (motionEvent.action == MotionEvent.ACTION_UP)
+//                view.performClick()
+//            else
+//                false
+//        }
 
-        binding.lastRecyclerView.setOnClickListener{
-            scope.launch {
-                transactionViewModel.deleteOld()
-            }
-            startActivity(Intent(this, HistoryActivity::class.java))
-        }
+//        binding.lastRecyclerView.setOnClickListener{
+//            scope.launch {
+//                for (i in 1..100) {
+//                    transactionViewModel.insert(
+//                        Transaction(
+//                            1919.810,
+//                            "test",
+//                            1672506000+i*60))
+//                }
+//            }
+//            startActivity(Intent(this, HistoryActivity::class.java))
+//        }
 
         transactionViewModel.lastTransaction.observe(this) { transition ->
             transition?.let { adapter.submitList(it) }
@@ -114,6 +120,14 @@ class RealMainActivity: AppCompatActivity() {
     private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    private fun handleRecyclerClick(): Boolean {
+        scope.launch {
+            transactionViewModel.deleteOld()
+        }
+        startActivity(Intent(this, HistoryActivity::class.java))
+        return true
     }
 
     private suspend fun sendPostRequest(entry487437733: String, entry198297327: String): Boolean = withContext(

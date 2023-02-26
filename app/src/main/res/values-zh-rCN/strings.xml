@@ -6,4 +6,13 @@
     <string name="cancel">取消</string>
     <string name="failed">失败</string>
     <string name="amount">数额</string>
+    <string name="history_activity">近期记录</string>
+    <string name="no_history">看起来你最近在此设备上还没有过记录，请提交记录后再查看。</string>
+    <string name="image_for_no_history">显示无记录的图片</string>
+    <string name="delete_all">删除全部</string>
+    <string name="delete_dialog_title">删除？</string>
+    <string name="delete_all_dialog_message">删除全部记录？</string>
+    <string name="delete_dialog_positive">删除</string>
+    <string name="delete_dialog_negative">取消</string>
+    <string name="delete_dialog_message">删除 %1$s 提交的记录？</string>
 </resources>

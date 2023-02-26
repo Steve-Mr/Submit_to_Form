@@ -20,4 +20,13 @@
     <string name="select_entries">Select Entries</string>
     <string name="delete_entries">Delete Entries</string>
     <string name="delete_entries_detail">Select and delete an entry</string>
+    <string name="history_activity">Recent Commit</string>
+    <string name="no_history">It seems that you have not commit history on this device, come here again after you submit something!</string>
+    <string name="image_for_no_history">Icon image for no history</string>
+    <string name="delete_all">Delete All</string>
+    <string name="delete_dialog_title">Delete?</string>
+    <string name="delete_all_dialog_message">Delete all records?</string>
+    <string name="delete_dialog_positive">Delete</string>
+    <string name="delete_dialog_negative">Cancel</string>
+    <string name="delete_dialog_message">Delete the record submitted at the %1$s ?</string>
 </resources>

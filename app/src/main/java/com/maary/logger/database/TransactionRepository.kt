@@ -20,4 +20,16 @@ class TransactionRepository(private val transactionDao: TransactionDao) {
     suspend fun deleteOldSubmit() {
         transactionDao.deleteOldSubmit()
     }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAll() {
+        transactionDao.deleteAll()
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteSelected(selected: Int) {
+        transactionDao.deleteSelected(selected)
+    }
 }
