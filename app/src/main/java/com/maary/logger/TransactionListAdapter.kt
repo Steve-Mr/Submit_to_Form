@@ -3,14 +3,15 @@ package com.maary.logger
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.maary.logger.database.Transaction
+import java.text.SimpleDateFormat
+import java.util.*
 
-class TransractionListAdapter : ListAdapter<Transaction, TransractionListAdapter.TransactionViewHolder>(TransactionsComparator()) {
+class TransactionListAdapter : ListAdapter<Transaction, TransactionListAdapter.TransactionViewHolder>(TransactionsComparator()) {
 
     class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val transactionAmountView: TextView = itemView.findViewById(R.id.transaction_amount)
@@ -19,7 +20,11 @@ class TransractionListAdapter : ListAdapter<Transaction, TransractionListAdapter
 
         fun bind(amount:Double?, time:Int?, type:String?) {
             transactionAmountView.text = amount.toString()
-            transactionTimeView.text = time.toString()
+            transactionTimeView.text =
+                SimpleDateFormat(
+                    "yyyy-MM-dd HH:mm:ss",
+                    Locale.getDefault())
+                    .format(time!!.toLong()*1000)
             transactionTypeView.text = type
         }
 

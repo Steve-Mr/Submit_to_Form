@@ -17,7 +17,7 @@ class TransactionRepository(private val transactionDao: TransactionDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun deleteOldSubmit(transaction: Transaction) {
+    suspend fun deleteOldSubmit() {
         transactionDao.deleteOldSubmit()
     }
 }

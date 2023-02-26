@@ -28,6 +28,7 @@
             android:excludeFromRecents="true"
             android:theme="@style/Theme.Logger.Dialog"/>
         <activity android:name=".SettingsActivity"/>
+        <activity android:name=".HistoryActivity"/>
     </application>
 
 </manifest>

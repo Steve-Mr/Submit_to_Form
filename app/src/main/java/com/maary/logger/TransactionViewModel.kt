@@ -12,6 +12,10 @@ class TransactionViewModel(private val transactionRepository: TransactionReposit
     fun insert(transaction: Transaction) = viewModelScope.launch {
         transactionRepository.insert(transaction)
     }
+
+    fun deleteOld() = viewModelScope.launch {
+        transactionRepository.deleteOldSubmit()
+    }
 }
 
 class TransactionViewModelFactory(private val transactionRepository: TransactionRepository) : ViewModelProvider.Factory {

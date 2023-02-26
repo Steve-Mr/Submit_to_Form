@@ -1,11 +1,13 @@
 package com.maary.logger
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
+import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,7 @@ class RealMainActivity: AppCompatActivity() {
         TransactionViewModelFactory((application as TransactionApplication).repository)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -53,13 +56,27 @@ class RealMainActivity: AppCompatActivity() {
             binding.types.showDropDown()
         }
 
-        val adapter = TransractionListAdapter()
+        val adapter = TransactionListAdapter()
         binding.lastRecyclerView.adapter = adapter
         binding.lastRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        transactionViewModel.lastTransaction.observe(this, Observer { transition ->
+        binding.lastRecyclerView.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_UP)
+                view.performClick()
+            else
+                false
+        }
+
+        binding.lastRecyclerView.setOnClickListener{
+            scope.launch {
+                transactionViewModel.deleteOld()
+            }
+            startActivity(Intent(this, HistoryActivity::class.java))
+        }
+
+        transactionViewModel.lastTransaction.observe(this) { transition ->
             transition?.let { adapter.submitList(it) }
-        })
+        }
 
         binding.yes.setOnClickListener {
 
