@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TransactionDao {
 
-    @Query("SELECT * FROM transaction_table ORDER BY time")
+    @Query("SELECT * FROM transaction_table ORDER BY time DESC")
     fun getRecentSubmit(): Flow<List<Transaction>>
 
     @Query("SELECT * FROM transaction_table ORDER BY time DESC LIMIT 1")
